@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm")
 }
 
-group = "com.kyotopvp"
+group = "com.codedbyyou"
 version = "1.0-SNAPSHOT"
 
 repositories {
