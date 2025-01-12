@@ -1,0 +1,21 @@
+# INTELLIJ IDEA
+./idea/*
+*.iml
+
+# Ignore build files
+*.class
+*.jar
+*/build/
+
+# Ignore gradle files
+.gradle/
+build/
+
+# Kotlin
+out/
+**/out/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
