@@ -1,0 +1,9 @@
+name: PaperNMSTestPlugin
+version: '${version}'
+main: com.codedbyyou.papernmstestplugin.PaperNMSTestPlugin
+api-version: '1.13'
+commands:
+  testnms:
+    description: Test command for PaperNMSTestPlugin
+    usage: /<command>
+    aliases: [nms]
