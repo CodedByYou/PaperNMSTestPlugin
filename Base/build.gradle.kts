@@ -7,48 +7,44 @@ plugins {
     kotlin("jvm")
 }
 
+val type = 0
+val types = arrayOf("", "-DEV", "-PROD")
+
+description = "PaperNMSTestPlugin"
+version = "1.0-SNAPSHOT${types[type]}"
+
+
 dependencies {
     paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
-
     implementation(kotlin("stdlib-jdk8"))
-    implementation(
-        project(
-            ":Versions:1.20"
-        )
-    )
+    implementation(project(":Versions:1.20"))
     implementation(project(":Shared"))
-
 }
 
 tasks.processResources {
-    val props = mapOf("version" to project.version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-
     filesMatching("plugin.yml") {
-        expand(props)
+        expand("version" to project.version)
     }
 }
 
 tasks.withType<ShadowJar> {
     dependsOn("processResources")
-    archiveBaseName.set("PaperNMSTestPlugin")
-    archiveClassifier.set("") // Makes this the main jar file
-    archiveVersion.set("") // Removes the version from the jar file
+    mergeServiceFiles()
+
+    archiveFileName.set("${project.description}-${project.version}.jar")
+    archiveClassifier.set("all") // Makes this the main jar file
+    archiveVersion.set(project.version.toString())
 
     relocate("com.codedbyyou.papernmstestplugin.shared", "com.codedbyyou.papernmstestplugin.base")
     relocate("com.codedbyyou.papernmstestplugin.v1_20", "com.codedbyyou.papernmstestplugin.versions.v1_20")
 
     manifest.attributes["Main-Class"] = "com.kyotopvp.papernmstestplugin.PaperNMSTestPlugin"
 
-
-
     from(sourceSets["main"].output)
-    from(sourceSets["main"].resources)
 
     minimize()
-
 }
+
 
 repositories {
     mavenCentral()
