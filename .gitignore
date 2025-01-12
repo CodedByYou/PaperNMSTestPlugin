@@ -1,5 +1,6 @@
 # INTELLIJ IDEA
 ./idea/*
+.idea/*
 *.iml
 
 # Ignore build files
